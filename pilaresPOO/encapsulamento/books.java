@@ -1,4 +1,4 @@
-package pilaresPOO;
+package pilaresPOO.encapsulamento;
 
 import java.util.Scanner;
 

@@ -22,5 +22,4 @@ public class Carro extends Veiculo {
     public void desligar() {
         System.out.println("Carro desligado!");
     }
-
 }
