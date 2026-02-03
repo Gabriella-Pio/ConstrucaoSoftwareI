@@ -13,6 +13,7 @@ public class main {
         // Instanciando Moto
         Moto minhaMoto = new Moto("Honda", "CB500F");
         minhaMoto.information();
+        minhaMoto.ligar();
         minhaMoto.empinar();
         minhaMoto.buzinar();
 
@@ -21,6 +22,7 @@ public class main {
         // Instanciando Caminhão
         Caminhao meuCaminhao = new Caminhao("Volvo", "FH16");
         meuCaminhao.information();
+        meuCaminhao.ligar();
         meuCaminhao.carregar();
         meuCaminhao.descarregar();
     }

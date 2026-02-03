@@ -16,4 +16,10 @@ public class Moto extends Veiculo {
     public void empinar() {
       System.out.println("Moto empinando!");
     }
+
+    // Polimorfismo: Sobrescrita do método ligar() para comportamento específico da Moto
+    @Override
+    public void ligar() {
+      System.out.println("A moto está ligada!");
+    }
 }

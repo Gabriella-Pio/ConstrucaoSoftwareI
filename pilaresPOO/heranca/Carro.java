@@ -14,6 +14,9 @@ public class Carro extends Veiculo {
         System.out.println("Tipo: Carro");
     }
     
-    // Comportamentos específicos de Carro
-
+    // Polimorfismo: Sobrescrita do método ligar() para comportamento específico da Moto
+    @Override
+    public void ligar() {
+      System.out.println("O carro está ligado!");
+    }
 }

@@ -21,4 +21,9 @@ public class Caminhao extends Veiculo {
         System.out.println("Caminhão descarregado!");
     }
   
+    // Polimorfismo: Sobrescrita do método ligar() para comportamento específico da Moto
+    @Override
+    public void ligar() {
+      System.out.println("O caminhão está ligado!");
+    }
 }
