@@ -1,6 +1,6 @@
 package atividade01.heranca;
 
-public class Animais {
+public class main {
   public static void main(String[] args) {
     Animal gato = new Gato();
     Animal cachorro = new Cachorro();

@@ -1,6 +1,6 @@
 package atividade01.polimorfismo;
 
-public class CalculadoraFrete {
+public class main {
   public static void main(String[] args) {
     Frete fretePAC = new FretePAC();
     Frete freteSEDEX = new FreteSEDEX();
