@@ -2,9 +2,10 @@ package atividade01.polimorfismo;
 
 public class main {
   public static void main(String[] args) {
-    Frete fretePAC = new FretePAC();
-    Frete freteSEDEX = new FreteSEDEX();
-    Frete freteRetirada = new FreteRetirada();
+    // Instancia fretes com taxas parametrizadas
+    Frete fretePAC = new FretePAC(5);
+    Frete freteSEDEX = new FreteSEDEX(10);
+    Frete freteRetirada = new FreteRetirada(0);
 
     double peso = 2.0; // peso em kg
 
