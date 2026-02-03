@@ -16,8 +16,4 @@ public class Moto extends Veiculo {
     public void empinar() {
       System.out.println("Moto empinando!");
     }
-
-    public void buzinar() {
-        System.out.println("Buzina tocando!");
-    }  
 }

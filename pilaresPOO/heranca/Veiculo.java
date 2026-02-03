@@ -31,4 +31,16 @@ public class Veiculo {
       // TODO Auto-generated method stub
       throw new UnsupportedOperationException("Unimplemented method 'information'");
     } 
+
+    public void ligar() {
+      System.out.println("Veículo ligado!");
+    }
+
+    public void desligar() {
+        System.out.println("Veículo desligado!");
+    }
+
+    public void buzinar() {
+        System.out.println("Buzina tocando!");
+    }  
 }
