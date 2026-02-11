@@ -17,7 +17,7 @@ public class BookController {
   public void showMenu() {
     int option = -1;
     while (option != 0) {
-      System.out.println("=== Sistema de Gerenciamento de Livros ===");
+      System.out.println("\n=== Sistema de Gerenciamento de Livros ===");
       System.out.println("1. Cadastrar Livro");
       System.out.println("2. Listar Livros");
       System.out.println("3. Buscar Livro por ID");
@@ -26,8 +26,10 @@ public class BookController {
       System.out.println("6. Atualizar Livro");
       System.out.println("7. Deletar Livro");
       System.out.println("0. Sair");
+      System.out.println("---------------------------------------");
       System.out.print("Escolha uma opção: ");
       option = Integer.parseInt(scanner.nextLine());
+      System.out.println("---------------------------------------\n");
 
       switch (option) {
         case 1:
