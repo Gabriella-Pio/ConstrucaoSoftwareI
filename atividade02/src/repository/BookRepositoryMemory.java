@@ -38,11 +38,7 @@ public class BookRepositoryMemory implements BookRepository {
 
   @Override
   public Optional<Book> findById(Integer id) {
-    // return Optional.ofNullable(books.get(id));
-
-    return books.values().stream()
-        .filter(book -> book.getId().equals(id))
-        .findFirst();
+    return Optional.ofNullable(books.get(id));
   }
 
   @Override
@@ -54,35 +50,17 @@ public class BookRepositoryMemory implements BookRepository {
 
   @Override
   public boolean update(Book book) {
-
     if (book == null || !books.containsKey(book.getId())) {
       return false;
     }
 
-    for (int i = 0; i < books.size(); i++) {
-
-      if (book == null || !books.containsKey(book.getId())) {
-        return false;
-      }
-
-      // books.put(book.getId(), book);
-      // return true;
-
-      Book existing = books.get(i);
-      
-      if (existing.getId().equals(book.getId())) {
-        // Check for ISBN conflict
-        Optional<Book> byIsbn = findByIsbn(book.getIsbn());
-        if (byIsbn.isPresent() && !byIsbn.get().getId().equals(book.getId())) {
-          throw new IllegalArgumentException("A book with the same ISBN already exists");
-        }
-
-        // Update book
-        books.put(book.getId(), book);
-        return true;
-      }
+    Optional<Book> byIsbn = findByIsbn(book.getIsbn());
+    if (byIsbn.isPresent() && !byIsbn.get().getId().equals(book.getId())) {
+      throw new IllegalArgumentException("A book with the same ISBN already exists");
     }
-    return false;
+
+    books.put(book.getId(), book);
+    return true;
   }
 
   @Override
@@ -96,6 +74,6 @@ public class BookRepositoryMemory implements BookRepository {
 
   @Override
   public int count() {
-    return books.size(); 
+    return books.size();
   }
 }

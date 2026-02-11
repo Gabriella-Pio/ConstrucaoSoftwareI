@@ -43,9 +43,12 @@ public class BookController {
           markAsUnavailable();
           break;
         case 5:
-          updateBook();
+          markAsAvailable();
           break;
         case 6:
+          updateBook();
+          break;
+        case 7:
           deleteBook();
           break;
         case 0:
@@ -88,7 +91,7 @@ public class BookController {
         System.out.println("ID: " + book.getId());
         System.out.println("Título: " + book.getTitle());
         System.out.println("Autor: " + book.getAuthor());
-        System.out.println("ISBN: " + book.getIsbn());
+        System.out.println("ISBN: " + book.getIsbnFormatted());
         System.out.println("Ano de Publicação: " + book.getPublicationYear());
         System.out.println("Disponível: " + (book.getAvailable() ? "Sim" : "Não"));
         System.out.println("-----------------------------");
@@ -106,7 +109,7 @@ public class BookController {
       System.out.println("ID: " + book.getId());
       System.out.println("Título: " + book.getTitle());
       System.out.println("Autor: " + book.getAuthor());
-      System.out.println("ISBN: " + book.getIsbn());
+      System.out.println("ISBN: " + book.getIsbnFormatted());
       System.out.println("Ano de Publicação: " + book.getPublicationYear());
       System.out.println("Disponível: " + (book.getAvailable() ? "Sim" : "Não"));
     } else {
@@ -200,8 +203,6 @@ public class BookController {
 
   // Tratamento de erros
 
-
   // Métodos auxiliares de leitura de dados
-
 
 }

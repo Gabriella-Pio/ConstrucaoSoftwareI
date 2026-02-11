@@ -28,27 +28,10 @@ public class BookService {
    * @return The registered book.
    */
   public Book signUpBook(String title, String author, String isbn, Integer publicationYear) {
-    try {
-      if (title == null || title.isEmpty()) {
-        throw new IllegalArgumentException("Title cannot be null or empty");
-      }
-      if (author == null || author.isEmpty()) {
-        throw new IllegalArgumentException("Author cannot be null or empty");
-      }
-      if (isbn == null || isbn.isEmpty()) {
-        throw new IllegalArgumentException("ISBN cannot be null or empty");
-      }
-      if (publicationYear == null || publicationYear <= 0) {
-        throw new IllegalArgumentException("Publication year must be a positive integer");
-      }
+    String cleanIsbn = isbn != null ? isbn.replaceAll("\\D", "") : null;
 
-      Book book = new Book(title, author, isbn, publicationYear, true);
-      return repository.save(book);
-
-    } catch (IllegalArgumentException e) {
-      System.err.println("Error during book registration: " + e.getMessage());
-      throw e;
-    }
+    Book book = new Book(title, author, cleanIsbn, publicationYear, true);
+    return repository.save(book);
   }
 
   // - listarLivros()
@@ -93,33 +76,9 @@ public class BookService {
    * @return true if the book was successfully updated.
    */
   public boolean updateBook(Book book) {
-    try {
-      if (book == null) {
-        throw new IllegalArgumentException("Book cannot be null");
-      }
-
-      // Updates only valid fields
-      if (book.getTitle() == null || book.getTitle().isEmpty()) {
-        throw new IllegalArgumentException("Title cannot be null or empty");
-      }
-      if (book.getAuthor() == null || book.getAuthor().isEmpty()) {
-        throw new IllegalArgumentException("Author cannot be null or empty");
-      }
-      if (book.getIsbn() == null || book.getIsbn().isEmpty()) {
-        throw new IllegalArgumentException("ISBN cannot be null or empty");
-      }
-      if (book.getPublicationYear() == null || book.getPublicationYear() <= 0) {
-        throw new IllegalArgumentException("Publication year must be a positive integer");
-      }
-      if (book.getAvailable() == null) {
-        throw new IllegalArgumentException("Availability cannot be null");
-      }
-
-      return repository.update(book);
-    } catch (IllegalArgumentException e) {
-      System.err.println("Error during book update: " + e.getMessage());
+    if (book == null)
       return false;
-    }
+    return repository.update(book);
   }
 
   // - removerLivro()

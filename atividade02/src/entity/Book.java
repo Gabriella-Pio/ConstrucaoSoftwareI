@@ -92,9 +92,7 @@ public class Book {
   }
 
   public String getIsbn() {
-    if (this.isbn == null)
-      return null;
-    return maskIsbn(this.isbn); // Chama um método privado de formatação
+    return isbn;
   }
 
   public Integer getPublicationYear() {
@@ -106,6 +104,12 @@ public class Book {
   }
 
   // Métodos de negócio
+
+  public String getIsbnFormatted() {
+    if (this.isbn == null)
+      return null;
+    return maskIsbn(this.isbn);
+  }
 
   // Recebe o ISBN (13 dígitos) e retorna uma versão mascarada
   // XXX-X-XXXX-XXXX-X
