@@ -19,12 +19,10 @@ public class Book {
   public Book(String title, String author, String isbn, Integer publicationYear, Boolean available) {
     this.id = counterId++;
     setTitle(title);
-
-    this.title = title;
-    this.author = author;
-    this.isbn = isbn;
-    this.publicationYear = publicationYear;
-    this.available = available;
+    setAuthor(author);
+    setIsbn(isbn);
+    setPublicationYear(publicationYear);
+    setAvailable(available);
   }
 
   // Setters
