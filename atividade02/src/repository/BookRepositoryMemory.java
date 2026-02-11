@@ -54,9 +54,9 @@ public class BookRepositoryMemory implements BookRepository {
       return false;
     }
 
-    Optional<Book> byIsbn = findByIsbn(book.getIsbn());
-    if (byIsbn.isPresent() && !byIsbn.get().getId().equals(book.getId())) {
-      throw new IllegalArgumentException("A book with the same ISBN already exists");
+    Optional<Book> existingIsbn = findByIsbn(book.getIsbn());
+    if (existingIsbn.isPresent() && !existingIsbn.get().getId().equals(book.getId())) {
+        throw new IllegalArgumentException("Já existe outro livro com este ISBN.");
     }
 
     books.put(book.getId(), book);
