@@ -1,4 +1,4 @@
-package br.com.luizsantos.tarefa.tarefa;
+package br.com.gabriella.tarefa;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

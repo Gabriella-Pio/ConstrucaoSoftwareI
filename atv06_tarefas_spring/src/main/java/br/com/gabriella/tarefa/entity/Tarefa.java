@@ -1,4 +1,4 @@
-package entity;
+package br.com.gabriella.tarefa.entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
