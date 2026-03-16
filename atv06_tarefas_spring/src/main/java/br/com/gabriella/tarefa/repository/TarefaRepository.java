@@ -38,4 +38,14 @@ public interface TarefaRepository extends JpaRepository<Tarefa, Long> {
 
     // QUERY ORIENTADA A METODO
     List<Tarefa> findByDataConclusaoIsNull();
+
+    @Query(value = "SELECT * FROM TB_TAREFA WHERE STATUS = :status", nativeQuery = true)
+    List<Tarefa> procurarPorStatus(Status status);
+
+    @Query(value = "SELECT * FROM TB_TAREFA WHERE PRIORIDADE = :prioridade", nativeQuery = true)
+    List<Tarefa> procurarPorPrioridade(Prioridade prioridade);
+
+    @Query(value = "SELECT * FROM TB_TAREFA WHERE DATA_VENCIMENTO < CURRENT_DATE AND DATA_CONCLUSAO IS NULL", nativeQuery = true)
+    List<Tarefa> procurarPorVencida();
+
 }
