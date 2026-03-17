@@ -1,10 +1,11 @@
-package br.com.gabriella.tarefa.service;
+package com.luizegabriella.reserva.service;
 
-import com.gabriellaluiz.reservahotel.entity.*;
-import com.gabriellaluiz.reservahotel.repository.ReservaRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
+
+import com.luizegabriella.reserva.entity.*;
+import com.luizegabriella.reserva.repository.ReservaRepository;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -63,7 +64,7 @@ public class ReservaService {
 
     // RESERVAS HOJE
     public List<Reserva> reservasHoje() {
-        return repository.findByDataEntrada(LocalDate.now());
+        return repository.findByDataEntradaBefore(LocalDate.now());
     }
 
     // RESERVAS PRÓXIMAS
@@ -77,7 +78,7 @@ public class ReservaService {
     // BUSCA POR NOME OU EMAIL
     public List<Reserva> buscar(String termo) {
         return repository
-                .findByNomeHospedeContainingIgnoreCaseOrEmailHospedeContainingIgnoreCase(termo, termo);
+                .findByNomeHospedeContainingIgnoreCaseOrEmailContainingIgnoreCase(termo, termo);
     }
 
     // EM HOSPEDAGEM
@@ -116,7 +117,7 @@ public class ReservaService {
         }
 
         reserva.setStatus(Status.EM_HOSPEDAGEM);
-        reserva.setDataCheckIn(LocalDateTime.now());
+        reserva.setDataCheckIn(null);
 
         return repository.save(reserva);
     }
@@ -132,7 +133,26 @@ public class ReservaService {
         }
 
         reserva.setStatus(Status.CONCLUIDA);
-        reserva.setDataCheckOut(LocalDateTime.now());
+        reserva.setDataCheckOut(null);
+
+        return repository.save(reserva);
+    }
+
+    // ATUALIZAR
+    public Reserva atualizar(Long id, Reserva novaReserva) {
+        Reserva reserva = buscarPorId(id);
+
+        if (reserva.getStatus() == Status.EM_HOSPEDAGEM) {
+            throw new ResponseStatusException(HttpStatus.CONFLICT,
+                    "Reserva em hospedagem não pode ser atualizada");
+        }
+
+        reserva.setNomeHospede(novaReserva.getNomeHospede());
+        reserva.setEmail(novaReserva.getEmail());
+        reserva.setDataEntrada(novaReserva.getDataEntrada());
+        reserva.setDataSaida(novaReserva.getDataSaida());
+        reserva.setTipoQuarto(novaReserva.getTipoQuarto());
+        reserva.setObservacoes(novaReserva.getObservacoes());
 
         return repository.save(reserva);
     }

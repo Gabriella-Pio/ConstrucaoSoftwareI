@@ -1,15 +1,15 @@
-package br.com.gabriella.tarefa.controller;
-
-import br.com.gabriella.tarefa.entity.Reserva;
-import br.com.gabriella.tarefa.entity.Status;
-import br.com.gabriella.tarefa.entity.TipoQuarto;
-import br.com.gabriella.tarefa.service.ReservaService;
+package com.luizegabriella.reserva.controller;
 
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import com.luizegabriella.reserva.entity.Reserva;
+import com.luizegabriella.reserva.entity.Status;
+import com.luizegabriella.reserva.entity.TipoQuarto;
+import com.luizegabriella.reserva.service.ReservaService;
 
 import java.util.List;
 
@@ -21,18 +21,18 @@ public class ReservaController {
     private ReservaService service;
 
     @GetMapping
-    public List<Reserva> findAll() {
-        return service.findAll();
+    public List<Reserva> listar() {
+        return service.listar();
     }
 
     @PostMapping
     public ResponseEntity<Reserva> salvar(@RequestBody @Valid Reserva reserva) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(service.salvar(reserva));
+        return ResponseEntity.status(HttpStatus.CREATED).body(service.criar(reserva));
     }
 
     @GetMapping("/{id}")
     public Reserva findById(@PathVariable Long id) {
-        return service.buscar(id);
+        return service.buscarPorId(id);
     }
 
     @PutMapping("/{id}")
@@ -50,12 +50,12 @@ public class ReservaController {
 
     @GetMapping("/status/{status}")
     public List<Reserva> findByStatus(@PathVariable Status status) {
-        return service.findByStatus(status);
+        return service.buscarPorStatus(status);
     }
 
     @GetMapping("/tipo_quarto/{tipoQuarto}")
     public List<Reserva> findByTipoQuarto(@PathVariable TipoQuarto tipoQuarto) {
-        return service.findByTipoQuarto(tipoQuarto);
+        return service.buscarPorTipo(tipoQuarto);
     }
 
     @GetMapping("/hoje")
@@ -65,12 +65,12 @@ public class ReservaController {
 
     @GetMapping("/proximas")
     public List<Reserva> reservasProximas(@RequestParam(defaultValue = "7") int dias) {
-        return service.reservasProximas(dias);
+        return service.proximasReservas(dias);
     }
 
     @GetMapping("/buscar")
     public List<Reserva> buscar(@RequestParam String termo) {
-        return service.buscarPorTermo(termo);
+        return service.buscar(termo);
     }
 
     // Ações

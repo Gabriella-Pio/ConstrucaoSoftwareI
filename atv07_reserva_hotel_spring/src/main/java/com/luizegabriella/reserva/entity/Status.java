@@ -1,4 +1,4 @@
-package br.com.gabriella.tarefa.entity;
+package com.luizegabriella.reserva.entity;
 
 public enum Status {
   PENDENTE,

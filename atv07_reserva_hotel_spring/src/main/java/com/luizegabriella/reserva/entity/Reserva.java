@@ -1,4 +1,4 @@
-package br.com.gabriella.tarefa.entity;
+package com.luizegabriella.reserva.entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
@@ -39,10 +39,10 @@ public class Reserva {
     @Column(name = "data_saida")
     private LocalDate dataSaida;
 
-    @Column(name = "data_check_in", nullable = false, updatable = false)
+    @Column(name = "data_check_in")
     private LocalDateTime dataCheckIn;
 
-    @Column(name = "data_check_out", nullable = false, updatable = false)
+    @Column(name = "data_check_out")
     private LocalDateTime dataCheckOut;
 
     @Column(name = "data_criacao", nullable = false, updatable = false)
@@ -126,19 +126,58 @@ public class Reserva {
     public String toString() {
         return "reserva{" +
                 "id=" + id +
-                ", titulo='" + titulo + '\'' +
-                ", descricao='" + descricao + '\'' +
+                ", nomeHospede='" + nomeHospede + '\'' +
+                ", email='" + email + '\'' +
+                ", telefone='" + telefone + '\'' +
+                ", dataEntrada=" + dataEntrada +
+                ", dataSaida=" + dataSaida +
+                ", dataCheckIn=" + dataCheckIn +
+                ", dataCheckOut=" + dataCheckOut +
                 ", dataCriacao=" + dataCriacao +
-                ", dataVencimento=" + dataVencimento +
-                ", dataConclusao=" + dataConclusao +
-                ", prioridade=" + prioridade +
+                ", tipoQuarto=" + tipoQuarto +
                 ", status=" + status +
-                ", tags='" + tags + '\'' +
+                ", observacoes='" + observacoes + '\'' +
                 '}';
     }
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getNomeHospede() {
+        return nomeHospede;
+    }
+
+    public void setNomeHospede(String nomeHospede) {
+        this.nomeHospede = nomeHospede;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getTelefone() {
+        return telefone;
+    }
+
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
+    }
+
+    public LocalDate getDataEntrada() {
+        return dataEntrada;
+    }
+
+    public void setDataEntrada(LocalDate dataEntrada) {
+        this.dataEntrada = dataEntrada;
     }
 
     public LocalDate getDataSaida() {

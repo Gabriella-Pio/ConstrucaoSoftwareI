@@ -1,4 +1,5 @@
-package br.com.luizsantos.tarefa.tarefa;
+package com.luizegabriella.reserva;
+
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

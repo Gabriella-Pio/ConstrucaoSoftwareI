@@ -1,4 +1,4 @@
-package br.com.gabriella.tarefa;
+package com.luizegabriella.reserva;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
