@@ -62,6 +62,10 @@ public class Reserva {
     @Column(name = "observacoes", length = 500)
     private String observacoes;
 
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "detalhes_id", unique = true)
+    private DetalhesEstadia detalhes;
+
     // Contrutor Vazio
     public Reserva() {
 
