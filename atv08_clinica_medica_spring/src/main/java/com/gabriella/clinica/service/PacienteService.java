@@ -4,18 +4,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
-import com.gabriella.clinica.entity.*;
-import com.gabriella.clinica.entity.ficha.FichaMedica;
 import com.gabriella.clinica.entity.paciente.Paciente;
 import com.gabriella.clinica.entity.paciente.Status;
 import com.gabriella.clinica.repository.PacienteRepository;
 
-import jakarta.transaction.Transactional;
-
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class PacienteService {
@@ -105,15 +100,16 @@ public class PacienteService {
 
         if (paciente.getStatusPaciente() == Status.ATIVO) {
             throw new ResponseStatusException(HttpStatus.CONFLICT,
-                    "Paciente ativo não pode ser excluído");
+                    "Paciente ativo não pode ser inativado via delete");
         }
 
-        repository.delete(paciente);
+        paciente.setStatusPaciente(Status.INATIVO);
+        repository.save(paciente);
     }
 
     // FILTRAR POR STATUS
     public List<Paciente> findByStatus(Status status) {
-        return repository.findByStatus(status)
+        return repository.findByStatusPaciente(status)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,
                         "Nenhum paciente encontrado com status: " + status));
     }
@@ -154,71 +150,18 @@ public class PacienteService {
         return repository.save(paciente);
     }
 
-    // // PacienteS HOJE
-    // public List<Paciente> pacientesHoje() {
-    //     return repository.findByDataEntradaBefore(LocalDate.now());
-    // }
-
-    // // RESERVAS PRÓXIMAS
-    // public List<Paciente> proximasPacientes(int dias) {
-    //     LocalDate inicio = LocalDate.now();
-    //     LocalDate fim = inicio.plusDays(dias);
-
-    //     return repository.findByDataEntradaBetween(inicio, fim);
-    // }
-
-    // // DETALHES DA ESTADIA
-    // @Transactional
-    // public Paciente vincularDetalhes(Long id, FichaMedica detalhes) {
-    //     Paciente paciente = buscarPorId(id);
-    //     if (paciente.getStatus() == Status.CANCELADA || paciente.getStatus() == Status.CONCLUIDA) {
-    //         throw new ResponseStatusException(HttpStatus.CONFLICT, "Paciente inválido para detalhes");
-    //     }
-    //     detalhes.setPaciente(paciente);
-    //     paciente.setDetalhes(detalhes);
-    //     return repository.save(paciente);
-    // }
-
     // BUSCA POR NOME OU EMAIL
     public List<Paciente> buscar(String termo) {
         return repository.buscarPorTermo(termo);
     }
 
-    // // EM HOSPEDAGEM
-    // public List<Paciente> emHospedagem() {
-    //     return repository.findByStatus(Status.EM_HOSPEDAGEM);
-    // }
+    // BUSCA PACIENTE COM FICHA
+    public List<Paciente> pacientesComFicha() {
+        return repository.findByFichaMedicaIsNotNull();
+    }
 
-    // // CONFIRMAR RESERVA
-    // public Paciente confirmar(Long id) {
-
-    //     Paciente paciente = buscarPorId(id);
-
-    //     if (paciente.getStatus() != Status.PENDENTE) {
-    //         throw new ResponseStatusException(HttpStatus.CONFLICT,
-    //                 "Reserva não pode ser confirmada");
-    //     }
-
-    //     paciente.setStatus(Status.CONFIRMADA);
-
-    //     return repository.save(paciente);
-    // }
-
-    // // CANCELAR
-    // public Paciente cancelar(Long id) {
-
-    //     Paciente paciente = buscarPorId(id);
-
-    //     if (paciente.getStatus() == Status.EM_HOSPEDAGEM ||
-    //             paciente.getStatus() == Status.CONCLUIDA) {
-
-    //         throw new ResponseStatusException(HttpStatus.CONFLICT,
-    //                 "Paciente não pode ser cancelado");
-    //     }
-
-    //     paciente.setStatus(Status.CANCELADA);
-
-    //     return repository.save(paciente);
-    // }
-
+    // BUSCA PACIENTE SEM FICHA
+    public List<Paciente> pacientesSemFicha() {
+        return repository.findByFichaMedicaIsNull();
+    }
 }

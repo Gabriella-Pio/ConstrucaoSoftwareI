@@ -11,6 +11,8 @@ import com.gabriella.clinica.entity.paciente.Status;
 import com.gabriella.clinica.entity.paciente.Sexo;
 import com.gabriella.clinica.entity.ficha.FichaMedica;
 
+import com.gabriella.clinica.repository.PacienteRepository;
+
 import com.gabriella.clinica.service.PacienteService;
 import com.gabriella.clinica.service.FichaMedicaService;
 
@@ -62,8 +64,6 @@ public class PacienteController {
         pacienteService.deletar(id);
     }
 
-  
-
     // Filtros e Buscas
     @GetMapping("/status/{status}")
     public List<Paciente> findByStatus(@PathVariable Status status) {
@@ -77,36 +77,14 @@ public class PacienteController {
 
     @GetMapping("/com-ficha")
     public List<Paciente> pacientesComFicha() {
-        return pacienteService.listar();
+        return pacienteService.pacientesComFicha();
     }
 
-    @GetMapping("sem-ficha")
+    @GetMapping("/sem-ficha")
     public List<Paciente> pacientesSemFicha() {
-        return pacienteService.listar();
+        return pacienteService.pacientesSemFicha();
     }
-
     
-
-    // @GetMapping("/tipo_quarto/{tipoQuarto}")
-    // public List<Paciente> findByTipoQuarto(@PathVariable TipoQuarto tipoQuarto) {
-    //     return service.buscarPorTipo(tipoQuarto);
-    // }
-
-    // @GetMapping("/hoje")
-    // public List<Paciente> pacientesHoje() {
-    //     return service.pacientesHoje();
-    // }
-
-    // @GetMapping("/proximas")
-    // public List<Paciente> pacientesProximas(@RequestParam(defaultValue = "7") int dias) {
-    //     return service.proximasPacientes(dias);
-    // }
-
-    // @GetMapping("/buscar")
-    // public List<Paciente> buscar(@RequestParam String termo) {
-    //     return service.buscar(termo);
-    // }
-
     // Ações
 
     @PatchMapping("/{id}/ativar")
@@ -136,8 +114,10 @@ public class PacienteController {
     // Fase 3
     // @PostMapping("/{id}/detalhes")
     // public ResponseEntity<Paciente> adicionarDetalhes(@PathVariable Long id,
-    //         @RequestBody @Valid FichaMedica detalhes) {
-    //     // Usa o service que já tem a lógica de vincular
-    //     return ResponseEntity.status(HttpStatus.CREATED).body(service.vincularDetalhes(id, detalhes));
+    // @RequestBody @Valid FichaMedica detalhes) {
+    // // Usa o service que já tem a lógica de vincular
+    // return
+    // ResponseEntity.status(HttpStatus.CREATED).body(service.vincularDetalhes(id,
+    // detalhes));
     // }
 }

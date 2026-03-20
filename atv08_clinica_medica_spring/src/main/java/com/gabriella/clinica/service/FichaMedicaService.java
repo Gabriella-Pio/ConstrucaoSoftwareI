@@ -1,6 +1,5 @@
 package com.gabriella.clinica.service;
 
-import com.gabriella.clinica.entity.*;
 import com.gabriella.clinica.entity.ficha.FichaMedica;
 import com.gabriella.clinica.entity.ficha.TipoSanguineo;
 import com.gabriella.clinica.entity.paciente.Paciente;
@@ -10,10 +9,8 @@ import com.gabriella.clinica.repository.PacienteRepository;
 
 import jakarta.transaction.Transactional;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;

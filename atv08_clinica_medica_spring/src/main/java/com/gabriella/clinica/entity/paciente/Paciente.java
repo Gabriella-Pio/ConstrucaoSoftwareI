@@ -7,7 +7,6 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.gabriella.clinica.entity.ficha.FichaMedica;
 
 @Entity
@@ -50,7 +49,7 @@ public class Paciente {
     @NotNull
     @Enumerated(EnumType.STRING)
     @Column(name = "status_paciente")
-    private Status statusPaciente;
+    private Status statusPaciente = Status.ATIVO;
 
     @Column(name = "data_cadastro")
     private LocalDateTime dataCadastro;
