@@ -44,7 +44,8 @@ public class FichaMedicaService {
     paciente.setFichaMedica(ficha);
 
     // Fase 2
-    // ficha.setPaciente(paciente);
+    paciente.setFichaMedica(ficha);
+    ficha.setPaciente(paciente);
 
     pacienteRepository.save(paciente);
 

@@ -7,6 +7,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.gabriella.clinica.entity.ficha.FichaMedica;
 
 @Entity
@@ -55,16 +56,15 @@ public class Paciente {
     private LocalDateTime dataCadastro;
 
     // Fase 1
-    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "ficha_id", unique = true)
-    private FichaMedica fichaMedica;
+    // @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+    // @JoinColumn(name = "ficha_id", unique = true)
+    // private FichaMedica fichaMedica;
 
     // Fase 2
-    // @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true, fetch =
-    // FetchType.LAZY)
-    // @JoinColumn(name = "ficha_medica", unique = true)
-    // @JsonManagedReference
-    // private FichaMedica fichaMedica;
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    @JoinColumn(name = "ficha_medica", unique = true)
+    @JsonManagedReference
+    private FichaMedica fichaMedica;
 
     // Fase 3
     // @OneToOne(mappedBy = "paciente", cascade = CascadeType.ALL, orphanRemoval =
@@ -165,7 +165,7 @@ public class Paciente {
     }
 
     public FichaMedica getFichaMedica() {
-      return fichaMedica;
+        return fichaMedica;
     }
 
     public void setFichaMedica(FichaMedica fichaMedica) {
