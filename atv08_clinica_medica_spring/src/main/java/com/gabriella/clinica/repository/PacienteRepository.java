@@ -5,10 +5,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import com.gabriella.clinica.entity.paciente.Paciente;
-import com.gabriella.clinica.entity.paciente.Sexo;
 import com.gabriella.clinica.entity.paciente.Status;
 
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 

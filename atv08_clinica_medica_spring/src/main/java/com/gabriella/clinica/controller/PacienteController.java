@@ -8,13 +8,8 @@ import org.springframework.web.bind.annotation.*;
 
 import com.gabriella.clinica.entity.paciente.Paciente;
 import com.gabriella.clinica.entity.paciente.Status;
-import com.gabriella.clinica.entity.paciente.Sexo;
-import com.gabriella.clinica.entity.ficha.FichaMedica;
-
-import com.gabriella.clinica.repository.PacienteRepository;
 
 import com.gabriella.clinica.service.PacienteService;
-import com.gabriella.clinica.service.FichaMedicaService;
 
 import java.util.List;
 
@@ -24,8 +19,6 @@ public class PacienteController {
 
     @Autowired
     private PacienteService pacienteService;
-    @Autowired
-    private FichaMedicaService fichaService;
 
     // Endpoints do Paciente
     @PostMapping
@@ -84,7 +77,7 @@ public class PacienteController {
     public List<Paciente> pacientesSemFicha() {
         return pacienteService.pacientesSemFicha();
     }
-    
+
     // Ações
 
     @PatchMapping("/{id}/ativar")

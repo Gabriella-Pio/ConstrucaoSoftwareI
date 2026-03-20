@@ -2,9 +2,6 @@ package com.gabriella.clinica.entity.ficha;
 
 import java.time.LocalDateTime;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.gabriella.clinica.entity.paciente.Paciente;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -12,12 +9,7 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.MapsId;
-import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
@@ -55,7 +47,7 @@ public class FichaMedica {
   private LocalDateTime dataAtualizacao;
 
   // Fase 1 - sem referência bidirecional
-  
+
   // Fase 2
   // @OneToOne(mappedBy = "fichaMedica")
   // @JsonBackReference
