@@ -27,21 +27,21 @@ Este projeto é uma API REST para gerenciamento de pacientes e fichas médicas, 
 
 ### 👤 Pacientes
 
-- **Cadastrar**: `POST /api/pacientes` 
-- **Listar Todos**: `GET /api/pacientes` 
-- **Buscar por ID**: `GET /api/pacientes/{id}` 
-- **Buscar Completo (com Ficha)**: `GET /api/pacientes/{id}/completo` 
-- **Buscar por CPF**: `GET /api/pacientes/cpf/{cpf}` 
-- **Atualizar Dados**: `PUT /api/pacientes/{id}` 
-- **Inativar (Soft Delete)**: `DELETE /api/pacientes/{id}` 
+- **Cadastrar**: `POST /api/pacientes`
+- **Listar Todos**: `GET /api/pacientes`
+- **Buscar por ID**: `GET /api/pacientes/{id}`
+- **Buscar Completo (com Ficha)**: `GET /api/pacientes/{id}/completo`
+- **Buscar por CPF**: `GET /api/pacientes/cpf/{cpf}`
+- **Atualizar Dados**: `PUT /api/pacientes/{id}`
+- **Inativar (Soft Delete)**: `DELETE /api/pacientes/{id}`
 - **Alterar Status**:
-  - `PATCH /api/pacientes/{id}/ativar` 
-  - `PATCH /api/pacientes/{id}/inativar` 
-  - `PATCH /api/pacientes/{id}/suspender` 
+  - `PATCH /api/pacientes/{id}/ativar`
+  - `PATCH /api/pacientes/{id}/inativar`
+  - `PATCH /api/pacientes/{id}/suspender`
 - **Busca e Filtros**:
-  - `GET /api/pacientes/buscar?termo={valor}` (Busca por nome ou e-mail) 
-  - `GET /api/pacientes/com-ficha` (Apenas pacientes com prontuário) 
-  - `GET /api/pacientes/sem-ficha` (Pacientes aguardando prontuário) 
+  - `GET /api/pacientes/buscar?termo={valor}` (Busca por nome ou e-mail)
+  - `GET /api/pacientes/com-ficha` (Apenas pacientes com prontuário)
+  - `GET /api/pacientes/sem-ficha` (Pacientes aguardando prontuário)
 
 ### 📄 Ficha Médica
 
@@ -53,29 +53,11 @@ Este projeto é uma API REST para gerenciamento de pacientes e fichas médicas, 
 
 ---
 
-## ⚖️ Regras de Negócio (Fase 1)
-
-### Paciente [cite: 167, 169, 171, 173]
-
-- **Campos Automáticos**: `dataCadastro` é gerada na criação; `statusPaciente` inicia como `ATIVO`.
-- **Unicidade**: CPF e E-mail não podem ser duplicados (Erro 409).
-- **Soft Delete**: O `DELETE` apenas altera o status para `INATIVO`, não remove do banco.
-- **Proteção**: O `PUT` não permite alterar CPF ou Data de Cadastro.
-
-### Ficha Médica [cite: 184, 185, 186, 188]
-
-- **Requisito de Status**: Só pode ser criada para pacientes com status `ATIVO`.
-- **Cardinalidade**: Apenas uma ficha por paciente (Erro 409 na segunda tentativa).
-- **Histórico**: O campo `dataAtualizacao` é renovado a cada alteração (PUT).
-- **Cascateamento**: Remover um paciente remove sua ficha automaticamente (`CascadeType.ALL`).
-
----
-
 ## 🧪 Exemplos de JSON para Teste
 
 **Criar Paciente (`POST /api/pacientes`):**
 
-````json
+```json
 {
   "nome": "Fulano de Tal",
   "cpf": "12345678901",
@@ -84,9 +66,10 @@ Este projeto é uma API REST para gerenciamento de pacientes e fichas médicas, 
   "dataNascimento": "2000-01-01",
   "sexo": "MASCULINO"
 }
-```json
+```
 
 **Ficha Médica (POST /api/pacientes/1/ficha):**
+
 ```json
 {
   "tipoSanguineo": "AB_POS",
@@ -95,5 +78,4 @@ Este projeto é uma API REST para gerenciamento de pacientes e fichas médicas, 
   "historicoDoencas": "Nenhum",
   "observacoesClinicas": "Paciente estável"
 }
-```json
-````
+```
