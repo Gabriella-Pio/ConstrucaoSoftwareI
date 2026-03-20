@@ -41,11 +41,10 @@ public class FichaMedicaService {
     }
 
     ficha.setDataAtualizacao(LocalDateTime.now());
-    paciente.setFichaMedica(ficha);
-
-    // Fase 2
-    paciente.setFichaMedica(ficha);
+    
+    // Fase 2 e 3
     ficha.setPaciente(paciente);
+    paciente.setFichaMedica(ficha);
 
     pacienteRepository.save(paciente);
 

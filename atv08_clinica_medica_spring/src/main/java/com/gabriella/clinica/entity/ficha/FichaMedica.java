@@ -9,9 +9,14 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
+
+// Imports para a Fase 2
+// import jakarta.persistence.GeneratedValue;
+// import jakarta.persistence.GenerationType;
+
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.MapsId;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
@@ -23,7 +28,7 @@ public class FichaMedica {
 
   @Id
   // Retirar para Fase 3
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  // @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
   @NotNull
@@ -53,16 +58,16 @@ public class FichaMedica {
   // Fase 1 - sem referência bidirecional
 
   // Fase 2
-  @OneToOne(mappedBy = "fichaMedica")
-  @JsonBackReference
-  private Paciente paciente;
-
-  // Fase 3
-  // @OneToOne
-  // @MapsId
-  // @JoinColumn(name = "id")
+  // @OneToOne(mappedBy = "fichaMedica")
   // @JsonBackReference
   // private Paciente paciente;
+
+  // Fase 3
+  @OneToOne
+  @MapsId
+  @JoinColumn(name = "id")
+  @JsonBackReference
+  private Paciente paciente;
 
   public FichaMedica() {
   }
@@ -162,7 +167,7 @@ public class FichaMedica {
         && java.util.Objects.equals(medicamentosUso, other.medicamentosUso)
         && java.util.Objects.equals(historicoDoencas, other.historicoDoencas)
         && java.util.Objects.equals(observacoesClinicas, other.observacoesClinicas)
-        && java.util.Objects.equals(dataAtualizacao, other.dataAtualizacao) 
+        && java.util.Objects.equals(dataAtualizacao, other.dataAtualizacao)
         && java.util.Objects.equals(paciente, other.paciente);
   }
 

@@ -61,16 +61,16 @@ public class Paciente {
     // private FichaMedica fichaMedica;
 
     // Fase 2
-    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-    @JoinColumn(name = "ficha_medica", unique = true)
-    @JsonManagedReference
-    private FichaMedica fichaMedica;
-
-    // Fase 3
-    // @OneToOne(mappedBy = "paciente", cascade = CascadeType.ALL, orphanRemoval =
-    // true)
+    // @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true, fetch =
+    // FetchType.LAZY)
+    // @JoinColumn(name = "ficha_medica", unique = true)
     // @JsonManagedReference
     // private FichaMedica fichaMedica;
+
+    // Fase 3
+    @OneToOne(mappedBy = "paciente", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
+    private FichaMedica fichaMedica;
 
     // Contrutor Vazio
     public Paciente() {
@@ -187,16 +187,14 @@ public class Paciente {
                 && Objects.equals(dataNascimento, paciente.dataNascimento)
                 && Objects.equals(sexo, paciente.sexo)
                 && Objects.equals(statusPaciente, paciente.statusPaciente)
-                && Objects.equals(dataCadastro, paciente.dataCadastro);
-        // && Objects.equals(fichaMedica, paciente.fichaMedica);
+                && Objects.equals(dataCadastro, paciente.dataCadastro)
+                && Objects.equals(fichaMedica, paciente.fichaMedica);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, nome, cpf, email, telefone, dataNascimento, sexo, statusPaciente, dataCadastro /*
-                                                                                                                * ,
-                                                                                                                * fichaMedica
-                                                                                                                */);
+        return Objects.hash(id, nome, cpf, email, telefone, dataNascimento, sexo, statusPaciente, dataCadastro,
+                fichaMedica);
     }
 
     @Override
@@ -211,7 +209,7 @@ public class Paciente {
                 ", sexo=" + sexo +
                 ", statusPaciente=" + statusPaciente +
                 ", dataCadastro=" + dataCadastro +
-                // ", fichaMedica=" + fichaMedica +
+                ", fichaMedica=" + fichaMedica +
                 '}';
     }
 }
