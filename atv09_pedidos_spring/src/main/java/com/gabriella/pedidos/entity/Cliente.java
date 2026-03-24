@@ -94,6 +94,9 @@ public class Cliente {
     this.endereco = endereco;
   }
 
+  @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL, orphanRemoval = true)
+  private List<Pedido> pedidos;
+
   @Override
   public int hashCode() {
     final int prime = 31;
