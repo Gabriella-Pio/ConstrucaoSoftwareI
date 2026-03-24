@@ -22,4 +22,10 @@ public class ClienteController {
   public Cliente findById(@PathVariable UUID id) {
     return clienteService.findById(id);
   }
+
+  @PatchMapping("/{id}")
+  public ResponseEntity<Cliente> update(@PathVariable UUID id, @RequestBody Pedido pedido) {
+    var updatedCliente = clienteService.novoPedido(id, pedido);
+    return ResponseEntity.ok(updatedCliente);
+  }
 }

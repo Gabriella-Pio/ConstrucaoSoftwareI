@@ -24,6 +24,7 @@ public class Pedidos {
 
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "cliente_id", nullable = false)
+  @JsonBackReference
   private Cliente cliente;
 
   public Pedidos() {

@@ -34,6 +34,10 @@ public class Cliente {
   @Column
   private String endereco;
 
+  @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL, orphanRemoval = true)
+  @JsonManagedReference
+  private List<Pedido> pedidos;
+
   public Cliente() {
   }
 
@@ -94,8 +98,13 @@ public class Cliente {
     this.endereco = endereco;
   }
 
-  @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL, orphanRemoval = true)
-  private List<Pedido> pedidos;
+  public void addPedido(Pedido pedido) {
+    if (this.pedidos == null) {
+      this.pedidos = new ArrayList<>();
+    }
+    pedidos.add(pedido);
+    pedido.setCliente(this);
+  }
 
   @Override
   public int hashCode() {

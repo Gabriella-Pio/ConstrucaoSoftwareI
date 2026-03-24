@@ -4,7 +4,6 @@ import br.com.gabriella.tarefa.entity.Tarefa;
 import br.com.gabriella.tarefa.service.TarefaService;
 import br.com.gabriella.tarefa.entity.Prioridade;
 import br.com.gabriella.tarefa.entity.Status;
-import br.com.gabriella.tarefa.repository.TarefaRepository;
 
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;

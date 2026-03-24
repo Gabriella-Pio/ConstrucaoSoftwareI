@@ -13,6 +13,11 @@ public class ClienteService {
     return clienteRepository.save(cliente);
   }
 
-  
+  public Cliente novoPedido(UUID clienteId, Pedido pedido) {
+    var cliente = clienteRepository.findById(clienteId)
+        .orElseThrow(() -> new RuntimeException("Cliente não encontrado"));
+    cliente.addPedido(pedido);
+    return clienteRepository.save(cliente);
+  }
 
 }
