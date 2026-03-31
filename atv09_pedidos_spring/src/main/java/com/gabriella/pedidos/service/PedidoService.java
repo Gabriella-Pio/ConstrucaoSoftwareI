@@ -1,7 +1,14 @@
-package main.java.com.gabriella.pedidos.service;
+package com.gabriella.pedidos.service;
 
-import main.java.com.gabriella.pedidos.repository.ClienteRepository;
+import java.util.List;
+import java.util.UUID;
 
+import org.springframework.stereotype.Service;
+
+import com.gabriella.pedidos.repository.PedidoRepository;
+import com.gabriella.pedidos.repository.ClienteRepository;
+import com.gabriella.pedidos.entity.Pedidos;
+import com.gabriella.pedidos.entity.Cliente;
 @Service
 public class PedidoService {
   
@@ -14,7 +21,7 @@ public class PedidoService {
   }
 
   // Salvar
-  public Pedido save(Pedido pedido) {
+  public Pedidos save(Pedidos pedido) {
     var cliente = clienteRepository.findById(pedido.getCliente().getId())
         .orElseThrow(() -> new RuntimeException("Cliente não encontrado"));
     pedido.setCliente(cliente);
@@ -23,12 +30,12 @@ public class PedidoService {
   }
 
   // Listar
-  public List<Pedido> findAll() {
+  public List<Pedidos> findAll() {
     return pedidoRepository.findAll();
   }
 
   // Buscar por ID
-  public Pedido findById(UUID id) {
+  public Pedidos findById(UUID id) {
     return pedidoRepository.findById(id)
         .orElseThrow(() -> new RuntimeException("Pedido não encontrado"));
   }

@@ -1,10 +1,14 @@
-package main.java.com.gabriella.pedidos.entity;
+package com.gabriella.pedidos.entity;
 
 import java.lang.annotation.Inherited;
 import java.time.LocalDate;
+import java.util.UUID;
 
 import javax.annotation.processing.Generated;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
+import jakarta.persistence.*;
 @Entity
 @Table(name = "TB_PEDIDOS")
 public class Pedidos {

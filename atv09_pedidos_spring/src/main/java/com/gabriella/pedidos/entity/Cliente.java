@@ -1,11 +1,19 @@
-package main.java.com.gabriella.pedidos.entity;
+package com.gabriella.pedidos.entity;
 
 import java.lang.annotation.Inherited;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 import javax.annotation.processing.Generated;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
+import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+
 @Entity
-@Table("TB_CLIENTE")
+@Table(name = "TB_CLIENTE")
 public class Cliente {
 
   // ID
@@ -23,11 +31,11 @@ public class Cliente {
   private String email;
 
   // Telefone
-  @Column(lenght = 20)
+  @Column(length = 20)
   private String telefone;
 
   // Cpf
-  @Column(unique = true, nullable = false, lenght = 11)
+  @Column(unique = true, nullable = false, length = 11)
   private String cpf;
 
   // Endereço
@@ -36,7 +44,7 @@ public class Cliente {
 
   @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL, orphanRemoval = true)
   @JsonManagedReference
-  private List<Pedido> pedidos;
+  private List<Pedidos> pedidos;
 
   public Cliente() {
   }
@@ -98,7 +106,7 @@ public class Cliente {
     this.endereco = endereco;
   }
 
-  public void addPedido(Pedido pedido) {
+  public void addPedido(Pedidos pedido) {
     if (this.pedidos == null) {
       this.pedidos = new ArrayList<>();
     }

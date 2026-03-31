@@ -1,4 +1,18 @@
-package main.java.com.gabriella.pedidos.controller;
+package com.gabriella.pedidos.controller;
+
+import java.util.List;
+import java.util.UUID;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.gabriella.pedidos.entity.Cliente;
+import com.gabriella.pedidos.entity.Pedidos;
+import com.gabriella.pedidos.service.ClienteService;
+
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/clientes")
@@ -24,7 +38,7 @@ public class ClienteController {
   }
 
   @PatchMapping("/{id}")
-  public ResponseEntity<Cliente> update(@PathVariable UUID id, @RequestBody Pedido pedido) {
+  public ResponseEntity<Cliente> update(@PathVariable UUID id, @RequestBody Pedidos pedido) {
     var updatedCliente = clienteService.novoPedido(id, pedido);
     return ResponseEntity.ok(updatedCliente);
   }
